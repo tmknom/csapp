@@ -43,6 +43,9 @@ integer: ## Build and run integer.c
 bit_shift: ## Build and run bit_shift.c
 	gcc -o $(BINARY_PATH) bit_shift.c $(BINARY_OBJECT) && $(BINARY_PATH)
 
+truncating: ## Build and run truncating.c
+	gcc -o $(BINARY_PATH) truncating.c $(BINARY_OBJECT) && $(BINARY_PATH)
+
 # https://postd.cc/auto-documented-makefile/
 help: ## Show help
 	@grep --no-filename -E '^[a-zA-Z0-9_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-40s\033[0m %s\n", $$1, $$2}'
