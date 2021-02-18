@@ -50,7 +50,7 @@ void print_binary_integer(int v, bool unsigned_flag) {
     create_binary_integer(v, binary);
 
     if (unsigned_flag) {
-        printf("binary = %s, hex = 0x%.8x, decimal = %d, type = u_int\n", binary, v, (unsigned int) v);
+        printf("binary = %s, hex = 0x%.8x, decimal = %u, type = u_int\n", binary, v, (unsigned int) v);
     } else {
         printf("binary = %s, hex = 0x%.8x, decimal = %d, type = int\n", binary, v, v);
     }
@@ -81,7 +81,7 @@ void print_binary_short(short v, bool unsigned_flag) {
     create_binary_short(v, binary);
 
     if (unsigned_flag) {
-        printf("binary = %s, hex = 0x%.8x, decimal = %d, type = u_short\n", binary, v, (unsigned short) v);
+        printf("binary = %s, hex = 0x%.8x, decimal = %u, type = u_short\n", binary, v, (unsigned short) v);
     } else {
         printf("binary = %s, hex = 0x%.8x, decimal = %d, type = short\n", binary, v, v);
     }
@@ -113,7 +113,7 @@ void print_binary_char(char v, bool unsigned_flag) {
     create_binary_char(v, binary);
 
     if (unsigned_flag) {
-        printf("binary = %s, hex = 0x%.8x, decimal = %d, type = u_char\n", binary, v, (unsigned char) v);
+        printf("binary = %s, hex = 0x%.8x, decimal = %u, type = u_char\n", binary, v, (unsigned char) v);
     } else {
         printf("binary = %s, hex = 0x%.8x, decimal = %d, type = char\n", binary, v, v);
     }
