@@ -6,11 +6,18 @@ SHELL=/bin/bash
 
 BASE_PATH = ..
 BINARY_PATH = $(BASE_PATH)/bin/main
+BINARY_OBJECT = $(BASE_PATH)/bin/binary.o
 
 # Phony Targets
 
 clean: ## Clean
 	rm -f $(BINARY_PATH)
+
+print: binary ## Build and run print.c
+	gcc -o $(BINARY_PATH) print.c $(BINARY_OBJECT) && $(BINARY_PATH)
+
+binary: ## Build binary.c
+	gcc -o $(BINARY_OBJECT) -c binary.c
 
 show_bytes: ## Build and run show_bytes.c
 	gcc -o $(BINARY_PATH) show_bytes.c && $(BINARY_PATH)
