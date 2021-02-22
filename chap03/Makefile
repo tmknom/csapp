@@ -8,6 +8,12 @@ BASE_PATH = .
 BINARY_PATH = $(BASE_PATH)/bin/main
 BINARY_OBJECT = $(BASE_PATH)/bin/binary.o
 
+define gcc
+	docker run --rm -w /work -v $(PWD):/work gcc gcc -Og -S -o ./bin/main.s ${1} && \
+	cat ./bin/main.s | \
+	grep -v -e '.size' -e '.globl' -e '.type' -e '.cfi' -e '.LF' -e '.ident' -e '.section' -e '.file' -e '.text'
+endef
+
 # Phony Targets
 
 clean: ## Clean
@@ -29,7 +35,10 @@ compile_main_mstore: ## gcc -Og -o $(BASE_PATH)/bin/main main.c mstore.c
 	gcc -Og -o $(BASE_PATH)/bin/main main.c mstore.c
 
 exchange: ## gcc -Og -S exchange.c
-	gcc -Og -S -o ./bin/main.s exchange.c && cat ./bin/main.s | grep -v -e '.size' -e '.globl' -e '.type' -e '.cfi' -e '.LF' -e '.ident' -e '.section' -e '.file' -e '.text'
+	$(call gcc,exchange.c)
+
+scale: ## gcc -Og -S scale.c
+	$(call gcc,scale.c)
 
 # https://postd.cc/auto-documented-makefile/
 help: ## Show help
