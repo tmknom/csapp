@@ -19,12 +19,6 @@ endef
 clean: ## Clean
 	rm -f $(BINARY_PATH)
 
-print: binary ## Build and run print.c
-	gcc -o $(BINARY_PATH) print.c $(BINARY_OBJECT) && $(BINARY_PATH)
-
-binary: ## Build binary.c
-	gcc -o $(BINARY_OBJECT) -c binary.c
-
 run: ## docker run
 	docker run -it --rm -w /work -v $(PWD):/work gcc /bin/bash
 
@@ -42,6 +36,9 @@ scale: ## gcc -Og -S scale.c
 
 arithmetic: ## gcc -Og -S arithmetic.c
 	$(call gcc,arithmetic.c)
+
+shift: ## gcc -Og -S shift.c
+	$(call gcc,shift.c)
 
 # https://postd.cc/auto-documented-makefile/
 help: ## Show help
