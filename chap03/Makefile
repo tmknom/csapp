@@ -40,6 +40,9 @@ exchange: ## gcc -Og -S exchange.c
 scale: ## gcc -Og -S scale.c
 	$(call gcc,scale.c)
 
+arithmetic: ## gcc -Og -S arithmetic.c
+	$(call gcc,arithmetic.c)
+
 # https://postd.cc/auto-documented-makefile/
 help: ## Show help
 	@grep --no-filename -E '^[a-zA-Z0-9_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-40s\033[0m %s\n", $$1, $$2}'
