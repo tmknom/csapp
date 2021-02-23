@@ -46,6 +46,9 @@ arith: ## gcc -Og -S arith.c
 oct: ## gcc -Og -S oct.c
 	$(call gcc,oct.c)
 
+comp: ## gcc -Og -S comp.c
+	$(call gcc,comp.c)
+
 # https://postd.cc/auto-documented-makefile/
 help: ## Show help
 	@grep --no-filename -E '^[a-zA-Z0-9_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-40s\033[0m %s\n", $$1, $$2}'
