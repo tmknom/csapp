@@ -64,6 +64,9 @@ fact_do: ## gcc -Og -S fact_do.c
 fact_while: ## gcc -Og -S fact_while.c
 	$(call gcc,fact_while.c)
 
+fact_for: ## gcc -Og -S fact_for.c
+	$(call gcc,fact_for.c)
+
 # https://postd.cc/auto-documented-makefile/
 help: ## Show help
 	@grep --no-filename -E '^[a-zA-Z0-9_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-40s\033[0m %s\n", $$1, $$2}'
