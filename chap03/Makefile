@@ -58,6 +58,9 @@ cond: ## gcc -Og -S cond.c
 cmov: ## gcc -Og -S cmov.c
 	$(call gcc,cmov.c)
 
+fact_do: ## gcc -Og -S fact_do.c
+	$(call gcc,fact_do.c)
+
 # https://postd.cc/auto-documented-makefile/
 help: ## Show help
 	@grep --no-filename -E '^[a-zA-Z0-9_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-40s\033[0m %s\n", $$1, $$2}'
