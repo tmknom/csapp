@@ -20,7 +20,7 @@ clean: ## Clean
 	rm -f $(BINARY_PATH)
 
 run: ## docker run
-	docker run -it --rm -w /work -v $(PWD):/work csapp /bin/bash || true
+	docker run -it --rm --cap-add=SYS_PTRACE --security-opt="seccomp=unconfined" -w /work -v $(PWD):/work csapp /bin/bash || true
 
 compile_mstore: ## gcc -Og -c mstore.c
 	gcc -Og -c mstore.c
