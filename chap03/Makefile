@@ -20,7 +20,7 @@ clean: ## Clean
 	rm -f $(BINARY_PATH)
 
 run: ## docker run
-	docker run -it --rm -w /work -v $(PWD):/work gcc /bin/bash
+	docker run -it --rm -w /work -v $(PWD):/work csapp /bin/bash || true
 
 compile_mstore: ## gcc -Og -c mstore.c
 	gcc -Og -c mstore.c
