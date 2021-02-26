@@ -82,6 +82,9 @@ array: ## gcc -Og -S array.c
 struct: ## gcc -Og -S struct.c
 	$(call gcc,struct.c)
 
+union: ## gcc -Og -S union.c
+	$(call gcc,union.c)
+
 # https://postd.cc/auto-documented-makefile/
 help: ## Show help
 	@grep --no-filename -E '^[a-zA-Z0-9_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-40s\033[0m %s\n", $$1, $$2}'
