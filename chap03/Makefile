@@ -88,6 +88,9 @@ union: ## gcc -Og -S union.c
 gets: ## gcc -Og -S gets.c
 	$(call gcc,gets.c)
 
+intlen: ## gcc -Og -S intlen.c
+	$(call gcc,intlen.c)
+
 # https://postd.cc/auto-documented-makefile/
 help: ## Show help
 	@grep --no-filename -E '^[a-zA-Z0-9_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-40s\033[0m %s\n", $$1, $$2}'
