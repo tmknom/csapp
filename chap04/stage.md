@@ -51,3 +51,26 @@ R[rA] ← valM = R[rax] = 9
 
 pC ← valP = 0x02e
 ```
+
+## 4.15
+
+4.7と同様にpop実行直前のrspをスタックに積む
+
+```
+# a04f push %rsp
+
+icode:ifun ← M1[PC] = a:0
+rA:rB ← M1[PC+1] = 4:f
+valP ← PC + 2
+
+valA ← R[rA]
+valB ← R[%rsp]
+
+valE ← valB + (-8) = R[%rsp] - 8
+
+M8[valE] ← valA = R[rA] = R[%rsp] # 古いSPを積む
+
+R[rsp] ← valE = R[%rsp] - 8
+
+pC ← valP = PC + 2
+```
