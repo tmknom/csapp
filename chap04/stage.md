@@ -162,6 +162,15 @@ word srcB = [
 ];
 ```
 
+## 4.21
+
+```
+word dstM = [
+    icode in {IMRMOVQ, IPOPQ} : rA;
+    1: RNONE;
+];
+```
+
 ## コピペ用定数定義
 
 ```
