@@ -49,7 +49,7 @@ valM ← M8[valA] =M8[120] = 9
 R[rsp] ← valE = 128
 R[rA] ← valM = R[rax] = 9
 
-pC ← valP = 0x02e
+PC ← valP = 0x02e
 ```
 
 ## 4.15
@@ -72,7 +72,7 @@ M8[valE] ← valA = R[rA] = R[%rsp] # 古いSPを積む
 
 R[rsp] ← valE = R[%rsp] - 8
 
-pC ← valP = PC + 2
+PC ← valP = PC + 2
 ```
 
 ## 4.16
@@ -96,7 +96,7 @@ valM ← M8[valA] # スタックに積まれていた値をvalMにセット
 R[rsp] ← valE # rspに正しい値をセット
 R[rA] ← valM  # R[rsp] = valM = スタックに積まれていた値をrspをセット
 
-pC ← valP = PC + 2
+PC ← valP = PC + 2
 ```
 
 ## 4.17
@@ -121,5 +121,25 @@ valE ← Cnd ? valA : valB # 条件を満たすならrAの値を代入、満た�
 R[rB] ← valE    # R[rB]にvalEを代入
 
 # PCアップデート
-pC ← valP
+PC ← valP
+```
+
+## 4.18
+
+```
+# 804100..00 call 0x041
+
+icode:ifun ← M1[0x037] = 8:0
+valC ← M8[0x038] = 0x41
+valP ← PC + 9 = 0x040
+
+valB ← R[%rsp] = 128
+
+valE ← valB + (-8) = 120
+
+M8[valE] ← valP = M8[120] ← 0x040
+
+R[rsp] ← valE = R[rsp] ← 120
+
+PC ← valC = 0x41
 ```
