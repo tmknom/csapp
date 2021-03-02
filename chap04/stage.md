@@ -54,7 +54,7 @@ pC ← valP = 0x02e
 
 ## 4.15
 
-4.7と同様にpop実行直前のrspをスタックに積む
+4.7と同様にpush実行直前のrspをスタックに積む
 
 ```
 # a04f push %rsp
@@ -71,6 +71,30 @@ valE ← valB + (-8) = R[%rsp] - 8
 M8[valE] ← valA = R[rA] = R[%rsp] # 古いSPを積む
 
 R[rsp] ← valE = R[%rsp] - 8
+
+pC ← valP = PC + 2
+```
+
+## 4.16
+
+4.8と同様にpop実行直前にスタックに積まれていた値をrspにセットする
+
+```
+# b04f pop %rsp
+
+icode:ifun ← M1[PC] = b:0
+rA:rB ← M1[PC+1] = 4:f
+valP ← PC + 2
+
+valA ← R[%rsp] # pop実行直前のrsp
+valB ← R[%rsp] # pop実行直前のrsp
+
+valE ← valB + 8 = R[%rsp] + 8 # pop実行後のrspの値の算出
+
+valM ← M8[valA] # スタックに積まれていた値をvalMにセット
+
+R[rsp] ← valE # rspに正しい値をセット
+R[rA] ← valM  # R[rsp] = valM = スタックに積まれていた値をrspをセット
 
 pC ← valP = PC + 2
 ```
