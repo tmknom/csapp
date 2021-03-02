@@ -171,6 +171,15 @@ word dstM = [
 ];
 ```
 
+## 4.23
+
+```
+word aluB = [
+    icode in {IPOPQ, IRMMOVQ, IMRMOVQ, IPUSHQ, IPOPQ, ICALL, IRET} : valB;
+    icode in {IRRMOVQ, IIRMOVQ} : 0;
+];
+```
+
 ## コピペ用定数定義
 
 ```
