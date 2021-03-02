@@ -38,6 +38,10 @@ abssum: ## yas abssum
 	$(call yas,abssum)
 	$(call ssim,abssum)
 
+abssum_move: ## yas abssum_move
+	$(call yas,abssum_move)
+	$(call ssim,abssum_move)
+
 # https://postd.cc/auto-documented-makefile/
 help: ## Show help
 	@grep --no-filename -E '^[a-zA-Z0-9_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-40s\033[0m %s\n", $$1, $$2}'

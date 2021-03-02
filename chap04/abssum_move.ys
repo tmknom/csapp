@@ -1,0 +1,45 @@
+# Modification of asum code to compute absolute values of entries.
+# This version uses a conditional jump
+# Execution begins at address 0
+	.pos 0
+	irmovq stack, %rsp  	# Set up stack pointer
+	call main		# Execute main program
+	halt			# Terminate program
+
+# Array of 4 elements
+	.align 8
+array:	.quad 0x0000000d000d000d
+	.quad 0xffffff3fff3fff40  # -0x000000c000c000c0
+	.quad 0x00000b000b000b00
+	.quad 0xffff5fff5fff6000  # -0x0000a000a000a000
+
+main:	irmovq array,%rdi
+	irmovq $4,%rsi
+	call abssum		# abssum(array, 4)
+	ret
+
+# array in %rdi, count in %rsi
+abssum:
+	irmovq	$8, %r8    # r8 = 定数「8」
+	irmovq	$1, %r9    # r9 = 定数「1」
+	xorq	%rax, %rax # sum = 0
+	andq	%rsi, %rsi # countの条件コードをセット
+	jmp	test           # 無条件でtestにジャンプ
+
+loop:
+	mrmovq	(%rdi), %r10 # r10 = *start
+	irmovq	$0, %r14     # r14 = 定数「0」
+	subq %r10, %r14      # r10の正負反転をr14に書き出す
+	andq	%r14, %r14   # r14の条件コードをセット
+	cmovge %r14, %r10   # r14が正の場合（r10が負の場合に）、r14をr10に書き戻す
+	addq	%r10,%rax  # Add to sum
+	addq	%r8, %rdi  # start + 1／ポインタなので1ワード(=8バイト)加算する
+	subq	%r9, %rsi  # count - 1
+
+test:
+	jne	loop # ゼロ以外ならloopにジャンプ
+	ret
+
+# The stack starts here and grows to lower addresses
+	.pos 0x200
+stack:
