@@ -189,6 +189,15 @@ word dstE = [
 ];
 ```
 
+## 4.25
+
+```
+word mem_data = [
+    icode in {IRMMOVQ, IPUSHQ} : valA;
+    icode in {ICALL} : valP;
+];
+```
+
 ## コピペ用定数定義
 
 ```
