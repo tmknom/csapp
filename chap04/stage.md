@@ -204,6 +204,17 @@ word mem_data = [
 bool mem_write = icode in {IRMMOVQ, IPUSHQ, ICALL};
 ```
 
+## 4.27
+
+```
+word Stat = [
+    imem_error || dmem_error : SADR;
+    !instr_valid : SINS;
+    icode == IHALT : SHLT;
+    1 : SAOK;
+];
+```
+
 ## コピペ用定数定義
 
 ```
