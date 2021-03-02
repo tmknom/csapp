@@ -143,3 +143,45 @@ R[rsp] ← valE = R[rsp] ← 120
 
 PC ← valC = 0x41
 ```
+
+## 4.19
+
+```
+bool need_valC = icode in {
+    IIRMOVQ, IRMMOVQ, IMRMOVQ, IJXX, ICALL
+};
+```
+
+## コピペ用定数定義
+
+```
+##### Symbolic representation of Y86-64 Instruction Codes #############
+wordsig INOP 	'I_NOP'
+wordsig IHALT	'I_HALT'
+wordsig IRRMOVQ	'I_RRMOVQ'
+wordsig IIRMOVQ	'I_IRMOVQ'
+wordsig IRMMOVQ	'I_RMMOVQ'
+wordsig IMRMOVQ	'I_MRMOVQ'
+wordsig IOPQ	'I_ALU'
+wordsig IJXX	'I_JMP'
+wordsig ICALL	'I_CALL'
+wordsig IRET	'I_RET'
+wordsig IPUSHQ	'I_PUSHQ'
+wordsig IPOPQ	'I_POPQ'
+
+##### Symbolic represenations of Y86-64 function codes                  #####
+wordsig FNONE    'F_NONE'        # Default function code
+
+##### Symbolic representation of Y86-64 Registers referenced explicitly #####
+wordsig RRSP     'REG_RSP'    	# Stack Pointer
+wordsig RNONE    'REG_NONE'   	# Special value indicating "no register"
+
+##### ALU Functions referenced explicitly                            #####
+wordsig ALUADD	'A_ADD'		# ALU should add its arguments
+
+##### Possible instruction status values                             #####
+wordsig SAOK	'STAT_AOK'	# Normal execution
+wordsig SADR	'STAT_ADR'	# Invalid memory address
+wordsig SINS	'STAT_INS'	# Invalid instruction
+wordsig SHLT	'STAT_HLT'	# Halt instruction encountered
+```
