@@ -98,3 +98,28 @@ R[rA] ← valM  # R[rsp] = valM = スタックに積まれていた値をrspを�
 
 pC ← valP = PC + 2
 ```
+
+## 4.17
+
+```
+# cmovXX rA, rB
+
+# フェッチ
+icode:ifun ← M1[PC]
+rA:rB ← M1[PC+1]
+valP ← PC + 2
+
+# デコード
+valA ← R[rA]    # valAにrAの値を代入
+valB ← R[rB]    # valBにrBの値を代入
+
+# 実行
+Cnd ← Cond(CC, ifun)     # 条件チェック
+valE ← Cnd ? valA : valB # 条件を満たすならrAの値を代入、満たさないならrBの値を代入
+
+# ライトバック
+R[rB] ← valE    # R[rB]にvalEを代入
+
+# PCアップデート
+pC ← valP
+```
