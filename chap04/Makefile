@@ -30,13 +30,13 @@ clean: ## Clean
 run: ## docker run
 	docker run -it --rm -w /work -v $(PWD):/work gcc:csapp /bin/bash || true
 
-rsum: ## yas rsum
-	$(call yas,rsum)
-	$(call ssim,rsum)
-
 asum: ## yas asum
 	$(call yas,asum)
 	$(call ssim,asum)
+
+abssum: ## yas abssum
+	$(call yas,abssum)
+	$(call ssim,abssum)
 
 # https://postd.cc/auto-documented-makefile/
 help: ## Show help
