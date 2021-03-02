@@ -180,6 +180,15 @@ word aluB = [
 ];
 ```
 
+## 4.24
+
+```
+word dstE = [
+    icode in {IRRMOVQ} && Cnd : rA;
+    ......
+];
+```
+
 ## コピペ用定数定義
 
 ```
