@@ -14,16 +14,29 @@ define gcc
 	grep -v -e '.size' -e '.globl' -e '.type' -e '.cfi' -e '.LF' -e '.ident' -e '.section' -e '.file' -e '.text'
 endef
 
+define yas
+	docker run --rm -w /work -v $(PWD):/work gcc:csapp /opt/sim/misc/yas ${1}.ys
+endef
+
+define ssim
+	docker run --rm -w /work -v $(PWD):/work gcc:csapp /opt/sim/seq/ssim ${1}.yo
+endef
+
 # Phony Targets
 
 clean: ## Clean
 	rm -f $(BINARY_PATH)
 
 run: ## docker run
-	docker run -it --rm -w /work -v $(PWD):/work csapp /bin/bash || true
+	docker run -it --rm -w /work -v $(PWD):/work gcc:csapp /bin/bash || true
 
-rsum: ## gcc -Og -S rsum.c
-	$(call gcc,rsum.c)
+rsum: ## yas rsum
+	$(call yas,rsum)
+	$(call ssim,rsum)
+
+asum: ## yas asum
+	$(call yas,asum)
+	$(call ssim,asum)
 
 # https://postd.cc/auto-documented-makefile/
 help: ## Show help
