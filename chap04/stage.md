@@ -198,6 +198,12 @@ word mem_data = [
 ];
 ```
 
+## 4.26
+
+```
+bool mem_write = icode in {IRMMOVQ, IPUSHQ, ICALL};
+```
+
 ## コピペ用定数定義
 
 ```
