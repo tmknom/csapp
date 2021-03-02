@@ -152,6 +152,16 @@ bool need_valC = icode in {
 };
 ```
 
+## 4.20
+
+```
+word srcB = [
+    icode in {IOPQ, IRMMOVQ, IMRMOVQ} : rA;
+    icode in {IPUSHQ, IPOPQ, ICALL, IRET} : RRSP;
+    1: RNONE;
+];
+```
+
 ## コピペ用定数定義
 
 ```
