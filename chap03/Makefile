@@ -20,7 +20,7 @@ clean: ## Clean
 	rm -f $(BINARY_PATH)
 
 run: ## docker run
-	docker run -it --rm -w /work -v $(PWD):/work csapp /bin/bash || true
+	docker run -it --rm --cap-add=SYS_PTRACE --security-opt="seccomp=unconfined" -w /work -v $(PWD):/work csapp /bin/bash || true
 
 compile_mstore: ## gcc -Og -c mstore.c
 	gcc -Og -c mstore.c
@@ -84,6 +84,18 @@ struct: ## gcc -Og -S struct.c
 
 union: ## gcc -Og -S union.c
 	$(call gcc,union.c)
+
+gets: ## gcc -Og -S gets.c
+	$(call gcc,gets.c)
+
+intlen: ## gcc -Og -S intlen.c
+	$(call gcc,intlen.c)
+
+vframe: ## gcc -Og -S vframe.c
+	$(call gcc,vframe.c)
+
+fbct: ## gcc -Og -S fbct.c
+	$(call gcc,fbct.c)
 
 # https://postd.cc/auto-documented-makefile/
 help: ## Show help
