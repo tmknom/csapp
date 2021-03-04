@@ -329,6 +329,19 @@ rrmovq %rsp,%rax     # I5：R[rax] = 5 (=R[rsp])
     - 「valA←R[rA]」の実行：valA←W_valM
 - 回答：優先順位が逆になると、popqのWステージから取得するd_valAがW_valEになり、インクリメント済みのスタックポインタになる
 
+## 4.34
+
+```
+word d_valB = [
+    d_srcB == e_dstE : e_valE;
+    d_srcB == M_dstM : m_valM;
+    d_srcB == M_dstE : M_valE;
+    d_srcB == W_dstM : W_valM;
+    d_srcB == W_dstE : W_valE;
+    1 : d_rvalB;
+];
+```
+
 ## コピペ用定数定義
 
 ```
