@@ -306,6 +306,29 @@ rrmovq %rsp,%rax     # I5：R[rax] = 5 (=R[rsp])
 
 Mステージの優先順位が逆の場合、I5で使用できるvalAの値はI4のM_valE=0x108となる。
 
+## 4.33
+
+```
+irmovq $5, %rdx      # I1：R[rdx] = 5
+irmovq $0x100, %rsp  # I2：R[rsp] = 0x100
+rmmovq %rdx, 0(%rsp) # I3：M[0x100] = 5 (=スタックトップにrdxの値を保存)
+popq %rsp            # I4：R[rsp] = 5 (=M[0x100]=スタックトップ)
+nop
+nop
+rrmovq %rsp,%rax     # I5：R[rax] = 5 (=R[rsp])
+```
+
+- I1：Done／R[rdx]=5
+- I2：Done／R[rsp]=0x100
+- I3：Done／M8[0x100]=5
+- I4：Wステージ
+    - 「R[rsp]←valE、R[rA]←valM」の実行：R[rsp]←0x108、R[rA]←5
+    - W_dstM=R[rA]、W_valM=5
+    - W_dstE=R[rsp]、W_valE=0x108
+- I5：Dステージ
+    - 「valA←R[rA]」の実行：valA←W_valM
+- 回答：優先順位が逆になると、popqのWステージから取得するd_valAがW_valEになり、インクリメント済みのスタックポインタになる
+
 ## コピペ用定数定義
 
 ```
