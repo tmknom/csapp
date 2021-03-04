@@ -236,6 +236,76 @@ word d_dstE = [
 ];
 ```
 
+## 4.32
+
+```
+irmovq $5, %rdx      # I1：R[rdx] = 5
+irmovq $0x100, %rsp  # I2：R[rsp] = 0x100
+rmmovq %rdx, 0(%rsp) # I3：M[0x100] = 5 (=スタックトップにrdxの値を保存)
+popq %rsp            # I4：R[rsp] = 5 (=M[0x100]=スタックトップ)
+rrmovq %rsp,%rax     # I5：R[rax] = 5 (=R[rsp])
+```
+
+### サイクル5
+
+- I1：Wステージ
+    - 「R[rB] ← valE」の実行：R[rdx]←5
+    - W_dstE=rdx、W_valE=5
+- I2：Mステージ
+    - なし
+    - M_dstE=rsp、M_valE=0x100
+- I3：Eステージ
+    - 「valE ← valB + valC」の実行：valE←0+R[rsp]
+    - e_dstE=なし、e_valE=0+R[rsp]
+- I4：Dステージ
+    - 「valA←R[rsp], valB←R[rsp]」の実行
+    - Load/useハザード発生：R[rsp]の値をメモリからまだ取り出せない（I3のMステージまでいかないとムリ）
+- I5：Fステージ
+    - 「rA:rB←M1[PC+1]」の実行
+
+### サイクル6
+
+- I1：Done／R[rdx]=5
+- I2：Wステージ
+    - 「R[rB] ← valE」の実行：R[rsp]←0x100
+    - W_dstE=rsp、W_valE=0x100
+- I3：Mステージ
+    - 「M8[valE]←valA」の実行：M8[R[rsp]]←R[rdx]
+    - M_dstM=0x100(=W_valE=R[rsp])、m_valM=5(=R[rdx])
+- I4：Dステージ
+    - 「valA←R[rsp], valB←R[rsp]」の実行：valA←5, valB←5
+    - m_valMの値をR[rsp]として使用できる
+- I5：Fステージ
+    - 「rA:rB←M1[PC+1]」の実行
+
+### サイクル7
+
+- I1：Done／R[rdx]=5
+- I2：Done／R[rsp]=0x100
+- I3：Wステージ
+    - なし：M8[0x100]=5
+- I4：Eステージ
+    - 「valE←valB+8」の実行：valE←0x108(=R[rsp]+8)
+    - e_dstE=なし、e_valE=0x108
+- I5：Dステージ
+    - 「valA←R[rA]」の実行：valA←0x100(=R[rsp])
+
+### サイクル8
+
+- I1：Done／R[rdx]=5
+- I2：Done／R[rsp]=0x100
+- I3：Done／M8[0x100]=5
+- I4：Mステージ
+    - 「valM←M8[valA]」の実行：valM←5(=M8[0x100])
+    - M_dstM=R[rA]、m_valM=5
+    - M_dstE=なし、M_valE=0x108
+- I5：Eステージ
+    - 「valE←0+valA」の実行：valE←5(=0+m_valM)
+
+### 回答
+
+Mステージの優先順位が逆の場合、I5で使用できるvalAの値はI4のM_valE=0x108となる。
+
 ## コピペ用定数定義
 
 ```
