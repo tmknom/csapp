@@ -375,6 +375,13 @@ bool E_bubble = (E_icode in {IMRMOVQ,IPOPQ} && E_dstM in {d_srcA, d_srcB})
                 || (E_icode == IJXX && !e_Cnd);
 ```
 
+## 4.41
+
+```
+bool set_cc = (icode == IOPQ) &&
+              !(m_stat in {SADR,SINS,SHLT} || W_stat in {SADR,SINS,SHLT});
+```
+
 ## コピペ用定数定義
 
 ```
