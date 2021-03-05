@@ -362,6 +362,12 @@ target:
   irmovq $5, %rax
 ```
 
+## 4.39
+
+```
+bool D_stall = E_icode in {IMRMOVQ,IPOPQ} && E_dstM in {d_srcA, d_srcB};
+```
+
 ## コピペ用定数定義
 
 ```
