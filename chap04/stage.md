@@ -351,6 +351,17 @@ m_stat = [
 ];
 ```
 
+## 4.37
+
+```
+  xorq %rax, %rax
+  jne target
+  irmovq $10, %rax
+target:
+  ret
+  irmovq $5, %rax
+```
+
 ## コピペ用定数定義
 
 ```
