@@ -342,6 +342,15 @@ word d_valB = [
 ];
 ```
 
+## 4.36
+
+```
+m_stat = [
+    dmem_error : SADR;
+    1 : M_stat;
+];
+```
+
 ## コピペ用定数定義
 
 ```
