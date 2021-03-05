@@ -368,6 +368,13 @@ target:
 bool D_stall = E_icode in {IMRMOVQ,IPOPQ} && E_dstM in {d_srcA, d_srcB};
 ```
 
+## 4.40
+
+```
+bool E_bubble = (E_icode in {IMRMOVQ,IPOPQ} && E_dstM in {d_srcA, d_srcB})
+                || (E_icode == IJXX && !e_Cnd);
+```
+
 ## コピペ用定数定義
 
 ```
