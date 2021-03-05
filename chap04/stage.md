@@ -382,6 +382,14 @@ bool set_cc = (icode == IOPQ) &&
               !(m_stat in {SADR,SINS,SHLT} || W_stat in {SADR,SINS,SHLT});
 ```
 
+## 4.42
+
+```
+bool M_bubble = m_stat in {SADR,SINS,SHLT} || W_stat in {SADR,SINS,SHLT};
+
+bool W_stall = W_stat in {SADR,SINS,SHLT};
+```
+
 ## コピペ用定数定義
 
 ```
