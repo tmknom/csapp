@@ -25,6 +25,9 @@ run: ## docker run
 sum: ## gcc sum.c
 	docker run --rm -w /work -v $(PWD):/work gcc gcc -save-temps -Og -o ./bin/main main.c sum.c
 
+symtab: ## gcc symtab.c
+	docker run --rm -w /work -v $(PWD):/work gcc gcc -Og -c -o ./bin/symtab.o symtab.c
+
 
 # https://postd.cc/auto-documented-makefile/
 help: ## Show help
