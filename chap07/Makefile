@@ -28,6 +28,9 @@ sum: ## gcc sum.c
 symtab: ## gcc symtab.c
 	docker run --rm -w /work -v $(PWD):/work gcc gcc -Og -c -o ./bin/symtab.o symtab.c
 
+swap: ## gcc swap.c
+	docker run --rm -w /work -v $(PWD):/work gcc gcc -Og -c -o ./bin/swap.o swap.c
+
 
 # https://postd.cc/auto-documented-makefile/
 help: ## Show help
