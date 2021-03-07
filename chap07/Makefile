@@ -31,6 +31,9 @@ symtab: ## gcc symtab.c
 swap: ## gcc swap.c
 	docker run --rm -w /work -v $(PWD):/work gcc gcc -Og -c -o ./bin/swap.o swap.c
 
+mult: ## gcc foo.c bar.c
+	docker run --rm -w /work -v $(PWD):/work gcc gcc -fcommon foo.c bar.c
+
 
 # https://postd.cc/auto-documented-makefile/
 help: ## Show help
