@@ -34,6 +34,16 @@ swap: ## gcc swap.c
 mult: ## gcc foo.c bar.c
 	docker run --rm -w /work -v $(PWD):/work gcc gcc -fcommon foo.c bar.c
 
+static: ## gcc addvec.c multvec.c
+	docker run --rm -w /work -v $(PWD):/work gcc gcc -c addvec.c multvec.c
+	docker run --rm -w /work -v $(PWD):/work gcc ar rcs libvector.a addvec.o multvec.o
+	docker run --rm -w /work -v $(PWD):/work gcc gcc -c main2.c
+	docker run --rm -w /work -v $(PWD):/work gcc gcc -static -o ./bin/main main2.o ./libvector.a
+
+share: ## gcc addvec.c multvec.c
+	docker run --rm -w /work -v $(PWD):/work gcc gcc -shared -fpic -o libvector.so addvec.c multvec.c
+	docker run --rm -w /work -v $(PWD):/work gcc gcc -o ./bin/main main2.c ./libvector.so
+
 
 # https://postd.cc/auto-documented-makefile/
 help: ## Show help
